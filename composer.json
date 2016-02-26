@@ -1,5 +1,5 @@
 {
-    "name": "suckkay/yii2-user-plus",
+    "name": "johnitvn/yii2-user-plus",
     "description":"High flexible user management extension for yii2",
     "type": "yii2-extension",
     "license": "Apache-2.0",
@@ -7,12 +7,12 @@
         {
             "name": "John Martin",
             "email": "john.itvn@gmail.com",
-            "homepage": "https://github.com/suckkay?tab=repositories"
+            "homepage": "https://github.com/johnitvn?tab=repositories"
         }
     ],
     "support": {
-        "issues": "https://github.com/suckkay/yii2-user-plus/issues?state=open",
-        "source": "https://github.com/suckkay/yii2-user-plus"
+        "issues": "https://github.com/johnitvn/yii2-user-plus/issues?state=open",
+        "source": "https://github.com/johnitvn/yii2-user-plus"
     },
     "suggest": {
         "johnitvn/yii2-rbac-plus": "Database role base access control manager for yii2"
@@ -28,10 +28,10 @@
     },
     "autoload": {
         "psr-4": {
-            "suckkay\\userplus\\": "src/"
+            "johnitvn\\userplus\\": "src/"
         }
     },
     "extra": {
-        "bootstrap": "suckkay\\userplus\\Bootstrap"
+        "bootstrap": "johnitvn\\userplus\\Bootstrap"
     }
 }
