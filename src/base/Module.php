@@ -17,7 +17,7 @@ abstract class Module extends YiiModule {
      * @var integer Time to remember user login.
      * Default is 1 day
      */
-    public $rememberFor = 3600 * 24;
+    public $rememberFor = 86400;
 
     /**
      * @var boolean enableRegister Enable user register.
