@@ -133,13 +133,13 @@ class UserAccounts extends ActiveRecord implements IdentityInterface {
     public function scenarios() {
         return [
             'create' => ['login', 'password', 'confirm_password'],
-            'register' => ['login', 'password', 'confirm_password', 'confirm_token'],
+            'register' => ['login', 'phone', 'password', 'confirm_password', 'confirm_token'],
             'console-create' => ['login', 'password'],
             'toggle-block' => ['blocked_at'],
             'block' => ['blocked_at'],
             'unblock' => ['blocked_at'],
             'toggle-administrator' => ['administrator'],
-            'update'=> ['password', 'confirm_password'],
+            'update'=> ['password', 'phone', 'confirm_password'],
             'change_password' => ['password', 'confirm_password','new_password','old_password'],
         ];
     }
@@ -154,6 +154,7 @@ class UserAccounts extends ActiveRecord implements IdentityInterface {
         return [ 
             'id' => Yii::t('app', 'ID'),
             'login' => Yii::t('app', 'Login'),
+            'phone' => Yii::t('app', 'Phone'),
             'password_hash' => Yii::t('app', 'Password Hash'),
             'auth_key' => Yii::t('app', 'Auth Key'),
             'administrator' => Yii::t('app', 'Administrator'),
@@ -237,10 +238,14 @@ class UserAccounts extends ActiveRecord implements IdentityInterface {
         $this->administrator = false;
         $this->creator = self::CREATOR_BY_REGISTER; 
         $this->prepareCreatorIp();
-
+        $this->confirm_token = $this->generateConfirmToken();
         if(!$this->save()){
             return false;
-        }
+        }   
+        $auth = Yii::$app->authManager;
+        $authorRole = $auth->getRole('school_admin');
+        $auth->assign($authorRole, $this->id);
+
 
         $this->trigger(self::AFTER_REGISTER);   
         return true;

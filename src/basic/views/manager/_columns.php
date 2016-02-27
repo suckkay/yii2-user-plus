@@ -21,6 +21,10 @@ $columns = [
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'login',
+    ], 
+    [
+        'class' => '\kartik\grid\DataColumn',
+        'attribute' => 'phone',
     ],    
     [
         'class' => '\kartik\grid\DataColumn',

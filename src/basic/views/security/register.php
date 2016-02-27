@@ -1,6 +1,8 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 $this->title = Yii::t('user', 'Sign up');
 ?>
 <div class="row">
@@ -15,6 +17,8 @@ $this->title = Yii::t('user', 'Sign up');
                     'enableAjaxValidation'   => true,
                     'enableClientValidation' => false,
                 ]); ?>
+                
+                <?= $form->field($model, 'phone') ?>
 
                 <?= $form->field($model, 'username') ?>
                 

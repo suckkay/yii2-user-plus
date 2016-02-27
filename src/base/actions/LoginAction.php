@@ -4,6 +4,7 @@ namespace johnitvn\userplus\base\actions;
 use Yii;
 use johnitvn\userplus\base\Action;
 use johnitvn\userplus\base\traits\AjaxValidationTrait;
+use app\models\School;
 
 /**
 * Login action will be handler user login request
@@ -34,14 +35,29 @@ class LoginAction extends Action{
                 
         $this->performAjaxValidation($model);
         
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {            
-            return $this->controller->goHome();
+        if ($model->load(Yii::$app->request->post()) && $model->login()){
+            if (Yii::$app->user->can('Administrator_permission')){
+                    return $this->controller->goHome();
+                }
+            else if($this->CheckSchool() == true){
+                return $this->controller->goHome();
+            }
+            else {
+                return Yii::$app->getResponse()->redirect('/site/wizard');
+            }
         } else {
             $view = $this->view == null ? $this->id : $this->view;
             return $this->controller->render($view, [
                         'model' => $model,
             ]);
         }
+    }
+
+    public function CheckSchool(){
+        $data = School::find()
+            ->where(['creator_id' => Yii::$app->user->identity->id])
+            ->one();
+        if($data == null) return false; else true;
     }
 
 

@@ -38,7 +38,7 @@ class ConfirmAction extends Action {
                 if ($waitTime > $confirmWithin) {
                     return $this->controller->render($view, [
                                 'success' => false,
-                                'message' => Yii::t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.'),
+                                'message' => Yii::t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.<a href="/login">Link</a>'),
                     ]);
                 }
             }
@@ -51,7 +51,7 @@ class ConfirmAction extends Action {
             } else {
                 return $this->controller->render($view, [
                             'success' => false,
-                            'message' => Yii::t('user','Something went wrong and your account has not been confirmed.'),
+                            'message' => Yii::t('user','Something went wrong and your account has not been confirmed. <a href="/login">Login</a>'),
                 ]);
             }
             
@@ -59,7 +59,7 @@ class ConfirmAction extends Action {
             $view = $this->view == null ? $this->id : $this->view;
             return $this->controller->render($view, [
                         'success' => false,
-                        'message' => Yii::t('user','Something went wrong and your account has not been confirmed.')
+                        'message' => Yii::t('user','Something went wrong and your account has not been confirmed. <a href="/login">Login</a>')
             ]);
         }
     }

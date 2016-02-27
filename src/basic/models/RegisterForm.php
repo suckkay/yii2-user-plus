@@ -18,6 +18,7 @@ class RegisterForm extends BaseRegisterForm {
         $labels = parent::attributeLabels();
         $labels['login'] = Yii::t('user', 'Email');
         $labels['username'] = Yii::t('user', 'Username');
+        $labels['phone'] = Yii::t('user', 'Phone');
         return $labels;
     }
 
@@ -27,6 +28,7 @@ class RegisterForm extends BaseRegisterForm {
         $rules['loginPattern'] = ['login', 'email'];
         
         $rules['usernameRequired'] = ['username', 'required'];
+        $rules['phoneRequired'] = ['phone', 'required'];
         $rules['usernamePattern'] = ['username', 'match', 'pattern' => '/^[-a-zA-Z0-9_\.@]+$/'];
         $rules['usernameLength'] = ['username', 'string', 'min' => 3, 'max' => 255];
         

@@ -27,7 +27,7 @@ class RegisterForm extends Model{
      */
     public $confirm_password;
 
-
+    public $phone;
     /**
      * @inheritdoc
      */
@@ -56,6 +56,7 @@ class RegisterForm extends Model{
     {
         return [
             'login'            => Yii::t('user', 'Login'),
+            'phone'            => Yii::t('user', 'Phone'),
             'password'         => Yii::t('user', 'Password'),
             'confirm_password' => Yii::t('user', 'Comfirm Password'),
         ];
