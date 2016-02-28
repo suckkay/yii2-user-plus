@@ -23,7 +23,7 @@ class ManagerController extends WebController {
     public function beforeAction($action) {
         if (!parent::beforeAction($action)) {
             return false;
-        } else if (Yii::$app->user->isGuest || !Yii::$app->user->identity->isAdministrator()) {
+        } else if (Yii::$app->user->isGuest || !Yii::$app->user->identity->isAdministrator() and !Yii::$app->user->can('school_admin')) {
             throw new \yii\web\ForbiddenHttpException(Yii::t('user', 'You are not allowed to perform this action.'));
         } else {
             return true;

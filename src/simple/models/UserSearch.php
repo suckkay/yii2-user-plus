@@ -53,7 +53,7 @@ class UserSearch extends UserAccounts
         if (!$this->validate()) {         
             return $dataProvider;
         }
-        if (\Yii::$app->user->can('school_admin')){
+        if (\Yii::$app->user->can('school_admin') and !\Yii::$app->user->can('administrator')){
              $query->andFilterWhere([
                  'creator'=> \Yii::$app->user->identity->id ,
             ]);   
