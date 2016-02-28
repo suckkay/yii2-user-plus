@@ -132,7 +132,7 @@ class UserAccounts extends ActiveRecord implements IdentityInterface {
      */
     public function scenarios() {
         return [
-            'create' => ['login', 'password', 'confirm_password'],
+            'create' => ['login', 'password', 'phone','confirm_password'],
             'register' => ['login', 'phone', 'password', 'confirm_password', 'confirm_token'],
             'console-create' => ['login', 'password'],
             'toggle-block' => ['blocked_at'],
@@ -140,7 +140,7 @@ class UserAccounts extends ActiveRecord implements IdentityInterface {
             'unblock' => ['blocked_at'],
             'toggle-administrator' => ['administrator'],
             'update'=> ['password', 'phone', 'confirm_password'],
-            'change_password' => ['password', 'confirm_password','new_password','old_password'],
+            'change_password' => ['password', 'phone', 'confirm_password','new_password','old_password'],
         ];
     }
     
@@ -224,6 +224,13 @@ class UserAccounts extends ActiveRecord implements IdentityInterface {
         if(!$this->save()){
             return false;
         }
+        if(Yii::$app->user->can('school_admin')){
+            $auth = Yii::$app->authManager;
+            $authorRole = $auth->getRole('school_teacher');
+            $auth->assign($authorRole, $this->id);   
+        }
+        
+
         $this->trigger(self::AFTER_CREATE); 
         return true;  
     }

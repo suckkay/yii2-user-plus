@@ -53,17 +53,22 @@ class UserSearch extends UserAccounts
         if (!$this->validate()) {         
             return $dataProvider;
         }
-
+        if (\Yii::$app->user->can('school_admin')){
+             $query->andFilterWhere([
+                 'creator'=> \Yii::$app->user->identity->id ,
+            ]);   
+        }else{
+            
         $query->andFilterWhere([
-            'id' => $this->id,
-            'creator'=> $this->creator,
-            'creator_ip' => $this->creator_ip,
-            'confirmed_at' => $this->confirmed_at,
-            'administrator'=> $this->administrator,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
-
+                'id' => $this->id,
+                'creator'=> $this->creator,
+                'creator_ip' => $this->creator_ip,
+                'confirmed_at' => $this->confirmed_at,
+                'administrator'=> $this->administrator,
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at,
+            ]);
+        }
         $query->andFilterWhere(['like', 'login', $this->login]);
 
         return $dataProvider;

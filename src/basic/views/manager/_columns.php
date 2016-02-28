@@ -122,6 +122,7 @@ $columns[] =   [
     },
     'format' => 'raw',
     'filter' => [0 => 'Not Admin', 1 => 'Admin'],
+     'visible' => Yii::$app->user->can('administrator'),        
 ];
     
 if (get_class($rbacModule) === 'johnitvn\rbacplus\Module') {
@@ -142,7 +143,7 @@ if (get_class($rbacModule) === 'johnitvn\rbacplus\Module') {
                         );
             },
             'format' => 'raw',    
-            'visible' => Yii::$app->user->identity->isAdministrator(),        
+            'visible' => Yii::$app->user->can('administrator'),        
         ];
     
 }
