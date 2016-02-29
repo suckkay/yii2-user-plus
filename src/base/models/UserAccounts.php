@@ -301,6 +301,11 @@ class UserAccounts extends ActiveRecord implements IdentityInterface {
     * Toggle block user
     * @return boolean whether toogle success
     */
+
+    
+    public function findmycreator(){
+        return $this->creator;
+    }
     public function toggleBlock(){
         $this->blocked_at = $this->blocked_at==null?time():null;
         return $this->Save();
