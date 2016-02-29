@@ -1,0 +1,37 @@
+{
+    "name": "johnitvn/yii2-user-plus",
+    "description":"High flexible user management extension for yii2",
+    "type": "yii2-extension",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "John Martin",
+            "email": "john.itvn@gmail.com",
+            "homepage": "https://github.com/johnitvn?tab=repositories"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/johnitvn/yii2-user-plus/issues?state=open",
+        "source": "https://github.com/johnitvn/yii2-user-plus"
+    },
+    "suggest": {
+        "johnitvn/yii2-rbac-plus": "Database role base access control manager for yii2"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": ">=2.0.4",
+        "yiisoft/yii2-bootstrap": "~2.0",
+        "yiisoft/yii2-swiftmailer": "~2.0",
+        "yiisoft/yii2-authclient": "~2.0",
+        "yiisoft/yii2-jui": "*",
+        "johnitvn/yii2-ajaxcrud": "2.0.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "johnitvn\\userplus\\": "src/"
+        }
+    },
+    "extra": {
+        "bootstrap": "johnitvn\\userplus\\Bootstrap"
+    }
+}
