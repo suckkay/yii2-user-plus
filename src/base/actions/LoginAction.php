@@ -36,15 +36,27 @@ class LoginAction extends Action{
         $this->performAjaxValidation($model);
         
         if ($model->load(Yii::$app->request->post()) && $model->login()){
-            if (Yii::$app->user->can('Administrator_permission')){
+
+
+            if (Yii::$app->user->can('administrator')){
+                   return $this->controller->goHome();
+            }
+            else if(Yii::$app->user->can('school_admin')){
+                if($this->CheckSchool(Yii::$app->user->identity->id) == true){
                     return $this->controller->goHome();
+                }else {
+                    return Yii::$app->getResponse()->redirect(Yii::$app->request->baseUrl.'/site/wizard');
                 }
-            else if($this->CheckSchool() == true){
-                return $this->controller->goHome();
             }
-            else {
-                return Yii::$app->getResponse()->redirect(Yii::$app->request->baseUrl.'/site/wizard');
+            else if(Yii::$app->user->can('school_teacher')){
+                if($this->CheckSchool(Yii::$app->user->identity->findmycreator()) == true){
+                    return $this->controller->goHome();
+                }else {
+                    throw new \yii\web\ForbiddenHttpException(Yii::t('user', 'You`r admin has not added school info.'));
+                }
             }
+           
+
         } else {
             $view = $this->view == null ? $this->id : $this->view;
             return $this->controller->render($view, [
@@ -53,10 +65,8 @@ class LoginAction extends Action{
         }
     }
 
-    public function CheckSchool(){
-        $data = School::find()
-            ->where(['creator_id' => Yii::$app->user->identity->id])
-            ->one();
+    public function CheckSchool($id){
+        $data = School::find()->where('creator_id = :userid', [':userid' => $id])->one();
         if($data == null) return false; else return true;
     }
 
